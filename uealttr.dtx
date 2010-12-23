@@ -262,6 +262,46 @@ This work consists of the file  uealttr.dtx
 % official letters. This makes use of a number of additional data 
 % macros, and also allows ready customisation.  It also makes layout 
 % changes to include a logo and address information.
+% 
+%\section{Installation}
+%
+%\changes{v3.4}{2010/01/15}{More detail on installation}
+% The package is supplied in \file{dtx} format and as a pre-extracted
+% zip file, \file{\jobname.tds.zip}. The later is most convenient for
+% most users: simply unzip this in your local texmf directory and
+% run \texttt{texhash} to update the database of file locations. If
+% you want to unpack the \file{dtx} yourself, running 
+% \texttt{tex \jobname.dtx} will extract the package whereas
+% \texttt{latex \jobname.dtx} will extract it and also typeset the
+% documentation.
+% 
+% Typesetting the documentation requires a number of packages in
+% addition to those needed to use the package. This is mainly 
+% because of the number of demonstration items included in the text. To
+% compile the documentation without error, you will need the packages:
+% \begin{itemize}
+%   \item \pkg{hypdoc}
+%   \item \pkg{listings}
+%   \item \pkg{lmodern}
+%   \item \pkg{mathpazo}
+%   \item \pkg{microtype}
+%\end{itemize}
+%
+%\section{Requirements}
+%
+% The \pkg{uealttr} class requires the following packages in addition
+% to material from the \LaTeX\ \pkg{required} and \pkg{tools} bundles:
+%\begin{itemize}
+%  \item \pkg{eso-pic}
+%  \item \pkg{geometry}
+%  \item \pkg{helvet}
+%  \item \pkg{ifpdf}
+%  \item \pkg{kvopions}
+%  \item \pkg{parskip}
+%\end{itemize} 
+% These are normally present in the current major \TeX\ distributions,
+% but are also available from \href{http://www.ctan.org}{The 
+% Comprehensive TeX Archive Network}.
 %
 %\section{Using the class}
 %
