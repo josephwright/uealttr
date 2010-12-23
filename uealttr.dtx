@@ -106,7 +106,6 @@ This work consists of the file  uealttr.dtx
 \fi
 %</internal>
 %<*driver>
-%<*driver>
 \documentclass[a4paper]{ltxdoc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -194,6 +193,8 @@ This work consists of the file  uealttr.dtx
 %          phone     ,
 %          position  ,
 %          school    ,
+%          sigfile   ,
+%          signature ,
 %          signemail ,
 %          signphone ,
 %          subject   ,
@@ -225,7 +226,7 @@ This work consists of the file  uealttr.dtx
 %\makeatother
 %
 %\title{\pkg{uealttr} --- A letter class for the University of 
-  East Anglia (UEA)^^A
+%  East Anglia (UEA)^^A
 %  \thanks{This file describes version v1.1, last revised 2008/10/31.}}
 %\author{Joseph Wright^^A
 %  \thanks{E-mail: joseph.wright@uea.ac.uk}}
@@ -241,6 +242,7 @@ This work consists of the file  uealttr.dtx
 %\changes{v1.2}{2010/12/23}{Use \cs{school} in place of \cs{department}
 %  (which is depreciated)}
 %\changes{v1.2}{2010/12/23}{Format \cs{today} correctly}
+%\changes{v1.2}{2010/12/23}{New \cs{sigfile} function}
 %
 %\begin{abstract}
 % The \pkg{uealttr} class is version of the standard \LaTeX\ letter class
@@ -394,6 +396,11 @@ This work consists of the file  uealttr.dtx
 % to the person signing the letter.  Notice that the name for the
 % signature is taken from \cs{signature} if available, otherwise the
 % \cs{name} macro is used.
+%\DescribeMacro{\sigfile}
+% To allow the inclusion of a scanned signature, the class provides
+% the \cs{sigfile} macro, which can be set to the file name of
+% such a scan. If \cs{sigfile} is set, the graphic will be included in
+% the space for a signature.
 %
 %\section{A demonstration letter}
 %
@@ -412,7 +419,7 @@ This work consists of the file  uealttr.dtx
 %    United Kingdom}
 %  \email{joseph.wright@uea.ac.uk}
 %  \phone{+44 (0)1603 592902}
-%  \fax{+44 (0)1603 592044}
+%  \fax{+44 (0)1603 592003}
 %  \web{www.uea.ac.uk}
 %  \position{Senior Research Associate}
 %  \begin{document}
@@ -444,7 +451,7 @@ This work consists of the file  uealttr.dtx
 %    United Kingdom}
 %  \email{joseph.wright@uea.ac.uk}
 %  \phone{+44 (0) 1603 592902}
-%  \fax{+44 (0) 1603 592044}
+%  \fax{+44 (0) 1603 592003}
 %  \web{www.uea.ac.uk}
 %  \position{Senior Research Associate}
 %  \RequirePackage[final]{microtype}
@@ -472,9 +479,9 @@ This work consists of the file  uealttr.dtx
 %  \PrintChanges
 %  \PrintIndex}
 %
-%\iffalse
+%    \begin{macrocode}
 %<*class>
-%\fi
+%    \end{macrocode}
 %
 %\section{The code}
 % The package starts with the usual identification.
@@ -617,6 +624,13 @@ This work consists of the file  uealttr.dtx
 %\end{macro}
 %\end{macro}
 %\end{macro}
+%\end{macro}
+%\begin{macro}{\sigfile}
+% A file can be made available for a graphical signature.
+%    \begin{macrocode}
+\newcommand*\sigfile[1]{\def\fromsigfile{#1}}
+\sigfile{}
+%    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\logo}
 %\begin{macro}{\fromlogo}
@@ -780,7 +794,13 @@ This work consists of the file  uealttr.dtx
   \par\nobreak\vspace{\parskip}%
   \stopbreaks
   \noindent
-  \ignorespaces #1\\[22mm]
+  \ignorespaces #1%
+  \ifx\fromsigfile\@empty
+    \\[22 mm]
+  \else
+    \\[1 mm]
+    \includegraphics{\fromsigfile}\\[1 mm]
+  \fi
   \ifx\@empty\fromsig
     \fromname \\
   \else
@@ -832,5 +852,9 @@ This work consists of the file  uealttr.dtx
 }
 %    \end{macrocode}
 %\end{macro}
+%
+%    \begin{macrocode}
+%</class>
+%    \end{macrocode}
 %
 %\Finale
