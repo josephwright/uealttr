@@ -190,7 +190,6 @@ This work consists of the file  uealttr.dtx
 %          logo      ,
 %          name      ,
 %          opening   ,
-%          phone     ,
 %          position  ,
 %          school    ,
 %          sigfile   ,
@@ -198,6 +197,7 @@ This work consists of the file  uealttr.dtx
 %          signemail ,
 %          signphone ,
 %          subject   ,
+%          telephone ,
 %          web       ,
 %        }
 %    }^^A 
@@ -240,6 +240,8 @@ This work consists of the file  uealttr.dtx
 %\changes{v1.1}{2008/08/14}{Improved match of layout with official
 %  template}
 %\changes{v1.2}{2010/12/23}{Use \cs{school} in place of \cs{department}
+%  (which is depreciated)}
+%\changes{v1.2}{2010/12/23}{Use \cs{telephone} in place of \cs{phone}
 %  (which is depreciated)}
 %\changes{v1.2}{2010/12/23}{Format \cs{today} correctly}
 %\changes{v1.2}{2010/12/23}{New \cs{sigfile} function}
@@ -380,10 +382,10 @@ This work consists of the file  uealttr.dtx
 % \cs{address}.
 %
 %\DescribeMacro{\email}
-%\DescribeMacro{\phone}
+%\DescribeMacro{\telephone}
 %\DescribeMacro{\fax}
 %\DescribeMacro{\web}
-% The macros \cs{email}, \cs{phone} and \cs{fax} are used to include
+% The macros \cs{email}, \cs{telephone} and \cs{fax} are used to include
 % general contact details underneath the address area.  In the same
 % way, \cs{web} includes a website in the same part of the letter.
 % This information will often be general departmental contact
@@ -418,7 +420,7 @@ This work consists of the file  uealttr.dtx
 %    Norwich NR4 7TJ \\
 %    United Kingdom}
 %  \email{joseph.wright@uea.ac.uk}
-%  \phone{+44 (0)1603 592902}
+%  \telephone{+44 (0)1603 592902}
 %  \fax{+44 (0)1603 592003}
 %  \web{www.uea.ac.uk}
 %  \position{Senior Research Associate}
@@ -450,7 +452,7 @@ This work consists of the file  uealttr.dtx
 %    Norwich NR4 7TJ \\
 %    United Kingdom}
 %  \email{joseph.wright@uea.ac.uk}
-%  \phone{+44 (0) 1603 592902}
+%  \telephone{+44 (0) 1603 592902}
 %  \fax{+44 (0) 1603 592003}
 %  \web{www.uea.ac.uk}
 %  \position{Senior Research Associate}
@@ -580,7 +582,7 @@ This work consists of the file  uealttr.dtx
 %\begin{macro}{\email}
 %\begin{macro}{\fromemail}
 %\begin{macro}{\phone}
-%\begin{macro}{\fromphone}
+%\begin{macro}{\telephonenum}
 %\begin{macro}{\fax}
 %\begin{macro}{\fromfax}
 %\begin{macro}{\web}
@@ -588,11 +590,11 @@ This work consists of the file  uealttr.dtx
 % Next come the contact details for the right-hand area.
 %    \begin{macrocode}
 \newcommand*\email[1]{\def\fromemail{#1}}
-\newcommand*\phone[1]{\def\fromphone{#1}}
+\let\phone\telephone
 \newcommand*\fax[1]{\def\fromfax{#1}}
 \newcommand*\web[1]{\def\fromweb{#1}}
 \email{}
-\phone{}
+\telephone{}
 \fax{}
 \web{}
 %    \end{macrocode}
@@ -759,8 +761,8 @@ This work consists of the file  uealttr.dtx
       \ifx\@empty\fromemail\else
         Email: \ignorespaces\fromemail \\
       \fi
-      \ifx\@empty\fromphone\else
-        Tel: \ignorespaces\fromphone \\
+      \ifx\@empty\telephonenum\else
+        Tel: \ignorespaces\telephonenum \\
       \fi
       \ifx\@empty\fromfax\else
         Fax: \ignorespaces\fromfax \\
