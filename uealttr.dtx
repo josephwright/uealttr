@@ -183,21 +183,21 @@ This work consists of the file  uealttr.dtx
 %      language     = [LaTeX]{TeX},
 %      moretexcs    = 
 %        {
-%          address    ,
-%          closing    ,
-%          department ,
-%          email      ,
-%          faculty    ,
-%          fax        ,
-%          logo       ,
-%          name       ,
-%          opening    ,
-%          phone      ,
-%          position   ,
-%          signemail  ,
-%          signphone  ,
-%          subject    ,
-%          web        ,
+%          address   ,
+%          closing   , 
+%          email     , 
+%          faculty   ,
+%          fax       ,
+%          logo      ,
+%          name      ,
+%          opening   ,
+%          phone     ,
+%          position  ,
+%          school    ,
+%          signemail ,
+%          signphone ,
+%          subject   ,
+%          web       ,
 %        }
 %    }^^A 
 %}
@@ -238,6 +238,8 @@ This work consists of the file  uealttr.dtx
 %  used by the Registry}
 %\changes{v1.1}{2008/08/14}{Improved match of layout with official
 %  template}
+%\changes{v1.2}{2010/12/23}{Use \cs{school} in place of \cs{department}
+%  (which is depreciated)}
 %
 %\begin{abstract}
 % The \pkg{uealttr} class is version of the standard \LaTeX\ letter class
@@ -324,13 +326,13 @@ This work consists of the file  uealttr.dtx
 %
 %\DescribeMacro{\subject}
 %\DescribeMacro{\faculty}
-%\DescribeMacro{\department}
+%\DescribeMacro{\school}
 % A number of pieces of data can be gathered by the standard
 % \pkg{letter} class, in macros such as \cs{name}, \cs{address},
 % \emph{etc}. The \pkg{uealttr} package adds a number of macros to this
 % list, all of which should be given before \cs{opening}. The
 % \cs{subject} macro is used to place a subject line in the output. The
-% \cs{faculty} and \cs{department} macros include the obvious
+% \cs{faculty} and \cs{school} macros include the obvious
 % information into the output file, before the contents of
 % \cs{address}.
 %
@@ -362,13 +364,13 @@ This work consists of the file  uealttr.dtx
 %  \usepackage{babel}
 %  \name{Joseph Wright}
 %  \faculty{Faculty of Science}
-%  \department{School of Chemical Sciences and Pharmacy}
+%  \school{School of Chemistry}
 %  \address{
 %    University of East Anglia \\
 %    Norwich NR4 7TJ \\
 %    United Kingdom}
 %  \email{joseph.wright@uea.ac.uk}
-%  \phone{+44 (0)1603 591680}
+%  \phone{+44 (0)1603 592902}
 %  \fax{+44 (0)1603 592044}
 %  \web{www.uea.ac.uk}
 %  \position{Senior Research Associate}
@@ -394,13 +396,13 @@ This work consists of the file  uealttr.dtx
 %\begin{LaTeXdemo}[code only]
 %  \name{Joseph Wright}
 %  \faculty{Faculty of Science}
-%  \department{School of Chemical Sciences and Pharmacy}
+%  \school{School of Chemistry}
 %  \address{
 %    University of East Anglia \\
 %    Norwich NR4 7TJ \\
 %    United Kingdom}
 %  \email{joseph.wright@uea.ac.uk}
-%  \phone{+44 (0) 1603 591680}
+%  \phone{+44 (0) 1603 592902}
 %  \fax{+44 (0) 1603 592044}
 %  \web{www.uea.ac.uk}
 %  \position{Senior Research Associate}
@@ -500,29 +502,32 @@ This work consists of the file  uealttr.dtx
 %\end{macro}
 % The UEA style is to use Helvetica for all text.
 %    \begin{macrocode}
-\renewcommand{\familydefault}{\sfdefault}
+\renewcommand\familydefault{\sfdefault}
 %    \end{macrocode}
 %\begin{macro}{\subject}
 %\begin{macro}{\lettersubject}
 % The subject of the letter is set up.
 %    \begin{macrocode}
-\newcommand*{\subject}[1]{\def\lettersubject{#1}}
+\newcommand*\subject[1]{\def\lettersubject{#1}}
 \subject{}
 %    \end{macrocode}
 %\end{macro}
 %\end{macro}
 %\begin{macro}{\faculty}
 %\begin{macro}{\fromfaculty}
+%\begin{macro}{\school}
 %\begin{macro}{\department}
-%\begin{macro}{\fromdept}
+%\begin{macro}{\fromschool}
 % A number of macros are used to store the various pieces of data
 % used in the address block.  First the faculty and department.
 %    \begin{macrocode}
-\newcommand*{\faculty}[1]{\def\fromfaculty{#1}}
-\newcommand*{\department}[1]{\def\fromdept{#1}}
+\newcommand*\faculty[1]{\def\fromfaculty{#1}}
+\newcommand*\school[1]{\def\fromschool{#1}}
+\let\department\school
 \faculty{}
-\department{}
+\school{}
 %    \end{macrocode}
+%\end{macro}
 %\end{macro}
 %\end{macro}
 %\end{macro}
@@ -537,10 +542,10 @@ This work consists of the file  uealttr.dtx
 %\begin{macro}{\fromweb}
 % Next come the contact details for the right-hand area.
 %    \begin{macrocode}
-\newcommand*{\email}[1]{\def\fromemail{#1}}
-\newcommand*{\phone}[1]{\def\fromphone{#1}}
-\newcommand*{\fax}[1]{\def\fromfax{#1}}
-\newcommand*{\web}[1]{\def\fromweb{#1}}
+\newcommand*\email[1]{\def\fromemail{#1}}
+\newcommand*\phone[1]{\def\fromphone{#1}}
+\newcommand*\fax[1]{\def\fromfax{#1}}
+\newcommand*\web[1]{\def\fromweb{#1}}
 \email{}
 \phone{}
 \fax{}
@@ -562,9 +567,9 @@ This work consists of the file  uealttr.dtx
 %\begin{macro}{\fromsignemail}
 % Finally, some details added after the signature.
 %    \begin{macrocode}
-\newcommand*{\position}[1]{\def\fromposition{#1}}
-\newcommand*{\signphone}[1]{\def\fromsignphone{#1}}
-\newcommand*{\signemail}[1]{\def\fromsignemail{#1}}
+\newcommand*\position[1]{\def\fromposition{#1}}
+\newcommand*\signphone[1]{\def\fromsignphone{#1}}
+\newcommand*\signemail[1]{\def\fromsignemail{#1}}
 \position{}
 \signphone{}
 \signemail{}
@@ -579,7 +584,7 @@ This work consists of the file  uealttr.dtx
 %\begin{macro}{\fromlogo}
 % Any local configuration is loaded, and options are processed.
 %    \begin{macrocode}
-\newcommand*{\logo}[1]{\def\fromlogo{#1}}
+\newcommand*\logo[1]{\def\fromlogo{#1}}
 \logo{uealogo}
 \InputIfFileExists{uealttr.cfg}
   {\ClassInfo{uealttr}{Loaded local configuration file}}
@@ -631,7 +636,7 @@ This work consists of the file  uealttr.dtx
 % To achieve the correct layout, completely new \cs{opening}
 % and \cs{closing} macros are employed.
 %    \begin{macrocode}
-\renewcommand*{\opening}[1]{%
+\renewcommand*\opening[1]{%
   \thispagestyle{empty}%
   \vspace*{18mm}%
 %    \end{macrocode}
@@ -685,15 +690,15 @@ This work consists of the file  uealttr.dtx
       \footnotesize
       \raggedright
       \ifx\@empty\fromfaculty
-        \ifx\@empty\fromdept\else
-          \ignorespaces\fromdept \\*[\baselineskip]
+        \ifx\@empty\fromschool\else
+          \ignorespaces\fromschool \\*[\baselineskip]
         \fi
       \else
-        \ifx\@empty\fromdept
+        \ifx\@empty\fromschool
           \textbf{\ignorespaces\fromfaculty} \\*[\baselineskip]
         \else
           \textbf{\ignorespaces\fromfaculty} \\
-          \ignorespaces\fromdept \\*[\baselineskip]
+          \ignorespaces\fromschool \\*[\baselineskip]
         \fi
       \fi
       \ifx\@empty\fromaddress\else
@@ -733,7 +738,7 @@ This work consists of the file  uealttr.dtx
 %\begin{macro}{\closing}
 % The same tricks are used for the closing.
 %    \begin{macrocode}
-\renewcommand{\closing}[1]{%
+\renewcommand\closing[1]{%
   \par\nobreak\vspace{\parskip}%
   \stopbreaks
   \noindent
@@ -760,7 +765,7 @@ This work consists of the file  uealttr.dtx
 % The \cs{stopletter} macro is used to push the contents up the page,
 % in contrast to normal \LaTeX\ behaviour.
 %    \begin{macrocode}
-\renewcommand*{\stopletter}{\vfill}
+\renewcommand*\stopletter{\vfill}
 %    \end{macrocode}
 %\end{macro}
 %
