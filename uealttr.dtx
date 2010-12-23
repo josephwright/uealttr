@@ -1,0 +1,904 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2008 by
+%    Joseph Wright <joseph.wright@uea.ac.uk>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either
+% version 1.3c of this license or (at your option) any later
+% version. The latest version of this license is in
+%    http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of
+% LaTeX version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The current maintainer of this work is Joseph Wright.
+%
+% This work consists of the source file uealttr.dtx
+%                 and the derived files uealttr.ins,
+%                                       uealttr.cls,
+%                                       jawltxdoc.sty,
+%                                       uealttr-manual.pdf and
+%                                       uealttr.pdf
+%
+% TDS-ready files:
+%    The compressed file uealttr.tds.zip contains an unpacked version
+%    of all of the files included here, and pre-compiled
+%    documentation in PDF format.  Simply decompress uealttr.tds.dtx
+%    in your local TeX directory, run your hash program (texhash,
+%    initexmf --update-fndb, etc.) and everything will be ready to
+%    go.  The user documentation for the package is called
+%    uealttr-manual.pdf; the file uealttr.pdf includes the user
+%    manual and the full source code.
+%
+% Unpacking:
+%    (a) If uealttr.ins is present:
+%           tex uealttr.ins
+%    (b) Without uealttr.ins:
+%           tex uealttr.dtx
+%    (c) If you use LaTeX to generate files:
+%           latex \let\install=y\input{uealttr.dtx}
+%
+% Documentation:
+%    (a) Without write18 enabled:
+%          pdflatex uealttr.dtx
+%          makeindex -s gind.ist uealttr.idx
+%          makeindex -s gglo.ist -o uealttr.gls uealttr.glo
+%          pdflatex uealttr.dtx
+%          pdflatex uealttr.dtx
+%    (b) With write18 enabled:
+%          pdflatex uealttr.dtx
+%          pdflatex uealttr.dtx
+%          pdflatex uealttr.dtx
+%
+% Installation:
+%     Copy uealttr.sty to a location searched by TeX, and if required
+%     by your TeX installation, run the appropriate command to build
+%     a hash of files (texhash, initexmf --update-fndb, etc.)
+%
+% Note:
+%     The jawltxdoc.sty file is not needed for installation, only for
+%     building the documentation; it may be deleted after producing
+%     the documentation (if necessary).
+%
+%<*ignore>
+% This is all taken verbatim from Heiko Oberdiek's packages
+\begingroup
+  \def\x{LaTeX2e}%
+\expandafter\endgroup
+\ifcase 0\ifx\install y1\fi\expandafter
+         \ifx\csname processbatchFile\endcsname\relax\else1\fi
+         \ifx\fmtname\x\else 1\fi\relax
+\else\csname fi\endcsname
+%</ignore>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+ ----------------------------------------------------------------
+ The uealttr package --- A letter class for UEA
+ Maintained by Joseph Wright
+ E-mail: joseph.wright@uea.ac.uk
+ Released under the LaTeX Project Public License v1.3c or later
+ See http://www.latex-project.org/lppl.txt
+ ----------------------------------------------------------------
+
+\endpreamble
+\Msg{Generating uealttr files:}
+\generate{\file{jawltxdoc.sty}{\from{\jobname.dtx}{jawltxdoc}}
+}
+\usedir{tex/latex/uealttr}
+\generate{\file{\jobname.cls}{\from{\jobname.dtx}{class}}
+}
+\usedir{source/latex/uealttr}
+\generate{\file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\nopreamble\nopostamble
+\usedir{doc/latex/uealttr}
+\generate{\file{README.txt}{\from{\jobname.dtx}{readme}}
+}
+\endbatchfile
+%</install>
+%<*readme>
+----------------------------------------------------------------
+The uealttr package --- A letter class for UEA
+Maintained by Joseph Wright
+E-mail: joseph.wright@uea.ac.uk
+Released under the LaTeX Project Public License v1.3c or later
+See http://www.latex-project.org/lppl.txt
+----------------------------------------------------------------
+
+The uealttr class is version of the standard LaTeX letter class
+customised for use at the University of East Anglia (UEA).  It
+is based on the Word template made available by the Publications
+Office.  Although aimed at UEA, the class is readily adapted to
+other organisations.
+%</readme>
+%<*ignore>
+\fi
+% Will Robertson's trick
+\immediate\write18{makeindex -s gind.ist -o \jobname.ind  \jobname.idx}
+\immediate\write18{makeindex -s gglo.ist -o \jobname.gls  \jobname.glo}
+%</ignore>
+%<*driver>
+\PassOptionsToClass{a4paper}{article}
+\documentclass[german,english,UKenglish]{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+%\OnlyDescription
+\usepackage{jawltxdoc}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+%\DoNotIndex{\&,\@date,\@empty,\\,\AddToShipoutPicture,\baselineskip}
+%\DoNotIndex{\begin,\ClassInfo,\ClassWarning,\DeclareBoolOption}
+%\DoNotIndex{\DeclareComplementaryOption,\def,\else,\end,\faculty}
+%\DoNotIndex{\familydefault,\fi,\footnotesize,\fromaddress,\fromname}
+%\DoNotIndex{\fromsig,\fromsignemail,\hspace,\IfFileExists,\ifpdf}
+%\DoNotIndex{\ifx,\ignorespaces,\includegraphics,\InputIfFileExists}
+%\DoNotIndex{\item,\itemindent,\leftmargin,\listparindent,\LoadClass}
+%\DoNotIndex{\MessageBreak,\NeedsTeXFormat,\newcommand}
+%\DoNotIndex{\newenvironment,\nobreak,\noindent,\overfullrule,\par}
+%\DoNotIndex{\parindent,\parsep,\parskip,\ProcessKeyvalOptions}
+%\DoNotIndex{\ProvidesClass,\put,\raggedright,\renewcomman}
+%\DoNotIndex{\RequirePackage,\rightmargin,\setkeys,\setlength}
+%\DoNotIndex{\SetupKeyvalOptions,\sfdefault,\stopbreaks,\strut}
+%\DoNotIndex{\textbf,\thispagestyl,\toaddress,\toname,\topsep}
+%\DoNotIndex{\unitlength,\vfill,\vspace,\z@,\MakeUppercase}
+%\DoNotIndex{\renewcommand,\thispagestyle,\expandafter}
+%
+%\CheckSum{357}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%\def\GetSVNId$#1: #2.#3 #4 #5-#6-#7 #8 #9${%
+%  \def\fileversion{v1.0}%
+%  \def\filedate{#5/#6/#7}}
+%
+%\GetSVNId $Id: uealttr.dtx 10 2008-07-22 10:07:12Z joseph $
+%
+%\changes{v1.0}{2008/07/21}{First public release}
+%
+%\setkeys{lst}{language=[LaTeX]{TeX},moretexcs={name,faculty,address,
+%  department,email,phone,fax,web,position,closing,opening,logo,
+%  subject,RequirePackage}}
+%
+%\title{\currpkg\ --- A letter class for UEA^^A
+%  \thanks{This file describes version \fileversion, last revised
+%    \filedate.}}
+%\author{Joseph Wright^^A
+%  \thanks{E-mail: joseph.wright@uea.ac.uk}}
+%\date{Released \filedate}
+%
+%\maketitle
+%
+%\begin{abstract}
+% The \currpkg class is version of the standard \LaTeX\ letter class
+% customised for use at the University of East Anglia (UEA).  It is
+% based on the \href
+% {http://www1.uea.ac.uk/cm/home/services/units/mac/comm/publicationsoffice/Templates}
+% {Word template} made available by the Publications Office. Although
+% aimed at UEA, the class is readily adapted to other organisations.
+%\end{abstract}
+%
+%\begin{multicols}{2}
+%  \tableofcontents
+%\end{multicols}
+%
+%\section{Introduction}
+% The \currpkg class is based on the standard \LaTeX\ class
+% \pkg{letter}.  It therefore inherits all of the normal macros from
+% the parent: \cs{name}, \cs{opening}, \cs{closing}, \etc.  However,
+% the class follows the current guidelines given by UEA for official
+% letters. This makes use of a number of additional data macros, and
+% also allows ready customisation.  It also makes layout changes to
+% include a logo and address information.
+%
+%\section{Using the class}
+%
+%\DescribeOption{draft}
+%\DescribeOption{final}
+% The class is loaded in the usual way, as the argument to
+% \cs{documentclass}. The package recognises the \opt{draft} option,
+% which will result in the inclusion of thick black bars to show
+% overfull boxes.  Any graphics will still be included, as
+% \pkg{graphicx} is loaded with the \opt{final} option.
+%
+%\DescribeMacro{\logo}
+% To allow setting up of a graphical logo, the \cs{logo} macro is
+% provided by the package.  This is used to set the name  of the file
+% containing the logo.  To allow use both with \LaTeX\ and
+% pdf\LaTeX\, this macro should not include the file extension. Like
+% other \pkg{letter} macros, \cs{logo} takes a single argument.
+%\begin{LaTeXexample}[noexample]
+%  \logo{uealogo}
+%\end{LaTeXexample}
+% will therefore cause the class to look for \file{uealogo.eps} if
+% compilation uses \LaTeX, or \file{uealogo.pdf} if using pdf\LaTeX.
+% The default setting of \cs{logo} is \opt{uealogo}.
+%
+% For UEA users, the official logo is available as a \ext{eps} file
+% from the \href
+% {http://www1.uea.ac.uk/cm/home/services/units/mac/comm/publicationsoffice/Logos}
+% {Publications Office}. The file can be converted to a \ext{pdf}
+% using \pkg{epstopdf}.  Doing this and saving both files to the
+% \TeX\ path will allow compilation with either \LaTeX\ or pdf\LaTeX.
+%
+%\DescribeOption{logo}
+% The class is designed so that the first page printed always
+% contains space for the logo.  Second and subsequent pages are
+% adjusted so that more of the paper is used for printing and the
+% logo is not required. The option \opt{logo} governs whether
+% the class attempts to print the logo, or simply reserves the space.
+% The option takes the values \opt{true} and \opt{false}, using the
+% key--value method.  To prevent printing the logo, the class is
+% loaded as follows.
+%\begin{LaTeXexample}[noexample]
+%  \documentclass[logo=false]{uealttr}
+%\end{LaTeXexample}
+% Note that by default, the class prints the logo (\ie as if
+% \opt{logo=true} had been given).
+%
+%\DescribeOption{personal}
+%\DescribeOption{confidential}
+% The \opt{personal} and \opt{confidential} options are provided.
+% These take Boolean (true/false) values using key--value syntax,
+% but can also be given alone.  Thus
+%\begin{LaTeXexample}[noexample]
+%  \documentclass[personal]{uealttr}
+%\end{LaTeXexample}
+% and
+%\begin{LaTeXexample}[noexample]
+%  \documentclass[personal=true]{uealttr}
+%\end{LaTeXexample}
+% act in the same way.  The two options will include ``PERSONAL'',
+% ``CONFIDENTIAL'' or ``PERSONAL \& CONFIDENTIAL'' in the address
+% area, if required.
+%
+%\DescribeMacro{\subject}
+%\DescribeMacro{\faculty}
+%\DescribeMacro{\department}
+% A number of pieces of data can be gathered by the standard
+% \pkg{letter} class, in macros such as \cs{name}, \cs{address},
+% \etc. The \currpkg package adds a number of macros to this list,
+% all of which should be given before \cs{opening}. The \cs{subject}
+% macro is used to place a subject line in the output. The
+% \cs{faculty} and \cs{department} macros include the obvious
+% information into the output file, before the contents of
+% \cs{address}.
+%
+%\DescribeMacro{\email}
+%\DescribeMacro{\phone}
+%\DescribeMacro{\fax}
+%\DescribeMacro{\web}
+% The macros \cs{email}, \cs{phone} and \cs{fax} are used to include
+% general contact details underneath the address area.  In the same
+% way, \cs{web} includes a website in the same part of the letter.
+% This information will often be general departmental contact
+% details.
+%\DescribeMacro{\position}
+%\DescribeMacro{\signemail}
+%\DescribeMacro{\signphone}
+% In contrast, \cs{position}, \cs{signemail} and \cs{signphone} add
+% information under the signature.  Thus these are intended to relate
+% to the person signing the letter.  Notice that the name for the
+% signature is taken from \cs{signature} if available, otherwise the
+% \cs{name} macro is used.
+%
+%\section{A demonstration letter}
+%
+% A simple letter, with all of the data directly in the source, might
+% read as follows.
+%\begin{LaTeXexample}[noexample]
+%  \documentclass[english,UKenglish]{uealttr}
+%  \usepackage[final]{microtype}
+%  \usepackage{babel}
+%  \name{Joseph Wright}
+%  \faculty{Faculty of Science}
+%  \department{School of Chemical Sciences and Pharmacy}
+%  \address{
+%    University of East Anglia \\
+%    Norwich NR4 7TJ \\
+%    United Kingdom}
+%  \email{joseph.wright@uea.ac.uk}
+%  \phone{+44 (0)1603 591680}
+%  \fax{+44 (0)1603 592044}
+%  \web{www.uea.ac.uk}
+%  \position{Senior Research Associate}
+%  \begin{document}
+%  \begin{letter}
+%  {Mr.~A.N.~Other \\ Some Company \\ Some Street \\ Sometown}
+%  \subject{A demonstration letter}
+%  \opening{Dear Mr.~Other,}
+%
+%  This is a rather boring letter, which simply shows how to use
+%  the class file.
+%
+%  \closing{Yours faithfully,}
+%  \end{letter}
+%  \end{document}
+%\end{LaTeXexample}
+%
+% To make configuration easier, the class will attempt to load a
+% configuration file \file{uealttr.cfg}.  This can be used to set up
+% repeated data. This can also contain other instructions for \LaTeX.
+%  For example, to include the standard data above in every letter,
+% the class author uses a configuration file reading
+%\begin{LaTeXexample}[noexample]
+%  \name{Joseph Wright}
+%  \faculty{Faculty of Science}
+%  \department{School of Chemical Sciences and Pharmacy}
+%  \address{
+%    University of East Anglia \\
+%    Norwich NR4 7TJ \\
+%    United Kingdom}
+%  \email{joseph.wright@uea.ac.uk}
+%  \phone{+44 (0)1603 591680}
+%  \fax{+44 (0)1603 592044}
+%  \web{www.uea.ac.uk}
+%  \position{Senior Research Associate}
+%  \RequirePackage{microtype}
+%  \RequirePackage{babel}
+%\end{LaTeXexample}
+%
+% The letter can then be reduced to.
+%\begin{LaTeXexample}[noexample]
+%  \documentclass[english,UKenglish]{uealttr}
+%  \begin{document}
+%  \begin{letter}
+%  {Mr.~A.N.~Other \\ Some Company \\ Some Street \\ Sometown}
+%  \subject{A demonstration letter}
+%  \opening{Dear Mr.~Other,}
+%
+%  This is a rather boring letter, which simply shows how to use
+%  the class file.
+%
+%  \closing{Yours faithfully,}
+%  \end{letter}
+%  \end{document}
+%\end{LaTeXexample}
+%
+%\StopEventually{%
+%  \PrintChanges
+%  \PrintIndex}
+%
+%\iffalse
+%<*class>
+%\fi
+%
+%\section{The code}
+%\begin{macro}{\uea@id}
+% The package starts with the usual identification.
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\def\uea@id$#1: #2.#3 #4 #5-#6-#7 #8 #9${#5/#6/#7}
+\ProvidesClass{uealttr}
+  [\uea@id$Id: uealttr.dtx 10 2008-07-22 10:07:12Z joseph $
+   v1.0 A letter class for UEA]
+%    \end{macrocode}
+%\end{macro}
+% The standard support packages are loaded.
+%    \begin{macrocode}
+\LoadClass[10pt,a4paper]{letter}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[final]{graphicx}
+\RequirePackage[parfill]{parskip}
+\RequirePackage{helvet,eso-pic,ifpdf,kvoptions}
+\RequirePackage[
+  hmargin=30mm,
+  vmargin=25mm,
+  dvips]{geometry}
+%    \end{macrocode}
+%\begin{macro}{\ifuea@personal}
+%\begin{macro}{\ifuea@confidential}
+%\begin{macro}{\ifuea@logo}
+%\begin{macro}{\ifuea@draft}
+% The single package option is declared.
+%    \begin{macrocode}
+\SetupKeyvalOptions{
+  family = uea,
+  prefix = uea@}
+\DeclareBoolOption{personal}
+\DeclareBoolOption{confidential}
+\DeclareBoolOption{logo}
+\DeclareBoolOption{draft}
+\DeclareComplementaryOption{final}{draft}
+\setkeys{uea}{
+  personal = false,
+  confidential = false,
+  logo = true,
+  draft = false}
+\ProcessKeyvalOptions{uea}
+\ifuea@draft
+  \setlength\overfullrule{5pt}
+\else
+  \setlength\overfullrule{0pt}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\begin{macro}{\uea@pandc}
+% For personal and confidential letters, some text is set up here.
+%    \begin{macrocode}
+\newcommand*{\uea@pandc}{}
+\ifuea@personal
+  \renewcommand*{\uea@pandc}{PERSONAL}
+  \ifuea@confidential
+    \renewcommand*{\uea@pandc}{PERSONAL \& CONFIDENTIAL}
+  \fi
+\else
+  \ifuea@confidential
+    \renewcommand*{\uea@pandc}{CONFIDENTIAL}
+  \fi
+\fi
+%    \end{macrocode}
+%\end{macro}
+% The UEA style is to use Helvetica for all text.
+%    \begin{macrocode}
+\renewcommand{\familydefault}{\sfdefault}
+%    \end{macrocode}
+%\begin{macro}{\subject}
+%\begin{macro}{\lettersubject}
+% The subject of the letter is set up.
+%    \begin{macrocode}
+\newcommand*{\subject}[1]{\def\lettersubject{#1}}
+\subject{}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\begin{macro}{\faculty}
+%\begin{macro}{\fromfaculty}
+%\begin{macro}{\department}
+%\begin{macro}{\fromdept}
+% A number of macros are used to store the various pieces of data
+% used in the address block.  First the faculty and department.
+%    \begin{macrocode}
+\newcommand*{\faculty}[1]{\def\fromfaculty{#1}}
+\newcommand*{\department}[1]{\def\fromdept{#1}}
+\faculty{}
+\department{}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\begin{macro}{\email}
+%\begin{macro}{\fromemail}
+%\begin{macro}{\phone}
+%\begin{macro}{\fromphone}
+%\begin{macro}{\fax}
+%\begin{macro}{\fromfax}
+%\begin{macro}{\web}
+%\begin{macro}{\fromweb}
+% Next come the contact details for the right-hand area.
+%    \begin{macrocode}
+\newcommand*{\email}[1]{\def\fromemail{#1}}
+\newcommand*{\phone}[1]{\def\fromphone{#1}}
+\newcommand*{\fax}[1]{\def\fromfax{#1}}
+\newcommand*{\web}[1]{\def\fromweb{#1}}
+\email{}
+\phone{}
+\fax{}
+\web{}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\begin{macro}{\position}
+%\begin{macro}{\fromposition}
+%\begin{macro}{\signphone}
+%\begin{macro}{\fromsignphone}
+%\begin{macro}{\signemail}
+%\begin{macro}{\fromsignemail}
+% Finally, some details added after the signature.
+%    \begin{macrocode}
+\newcommand*{\position}[1]{\def\fromposition{#1}}
+\newcommand*{\signphone}[1]{\def\fromsignphone{#1}}
+\newcommand*{\signemail}[1]{\def\fromsignemail{#1}}
+\position{}
+\signphone{}
+\signemail{}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\begin{macro}{\logo}
+%\begin{macro}{\fromlogo}
+% Any local configuration is loaded, and options are processed.
+%    \begin{macrocode}
+\newcommand*{\logo}[1]{\def\fromlogo{#1}}
+\logo{uealogo}
+\InputIfFileExists{uealttr.cfg}
+  {\ClassInfo{uealttr}{Loaded local configuration file}}
+  {}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+% If no logo is available, the package will skip trying to position
+% it.
+%    \begin{macrocode}
+\ifpdf
+  \IfFileExists{\fromlogo.pdf}
+    {}
+    {\ifuea@logo
+       \ClassWarning{uealttr}
+         {Logo file \fromlogo.pdf not found!\MessageBreak
+          No logo will be included in output}
+     \fi
+     \uea@logofalse}
+\else
+  \IfFileExists{\fromlogo.eps}
+    {}
+    {\ifuea@logo
+       \ClassWarning{uealttr}
+         {Logo file \fromlogo.eps not found!\MessageBreak
+          No logo will be included in output}
+     \fi
+     \uea@logofalse}
+\fi
+%    \end{macrocode}
+%\begin{environment}{wider}
+% A trick taken from \pkg{memoir} and the UK FAQ: here, the extra
+% width needed is known.
+%    \begin{macrocode}
+\newenvironment{wider}{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{\z@}%
+    \setlength{\rightmargin}{-22mm}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+%    \end{macrocode}
+%\end{environment}
+%\begin{macro}{\opening}
+% To achieve the correct layout, completely new \cs{opening}
+% and \cs{closing} macros are employed.
+%    \begin{macrocode}
+\renewcommand*{\opening}[1]{%
+  \thispagestyle{empty}%
+  \vspace*{19mm}%
+%    \end{macrocode}
+% If the logo has been requested, it is included here.
+%    \begin{macrocode}
+  \ifuea@logo
+    \AddToShipoutPicture*{%
+      \setlength{\unitlength}{1mm}%
+      \put(147,257){\includegraphics{\fromlogo}}}%
+  \fi
+%    \end{macrocode}
+% The address block is created by using a series of minipages of the
+% correct width.  All of this is nested inside a group where the
+% margins are made wider.
+%    \begin{macrocode}
+  \begin{wider}
+    \setlength{\leftmargin}{\z@}%
+    \setlength{\rightmargin}{22mm}%
+    \begin{minipage}[t]{80mm}
+      \begin{minipage}[t]{80mm}
+        \raggedright
+        \ifx\@empty\uea@pandc\else
+          \textbf{\uea@pandc} \\*[\baselineskip]
+        \fi
+        \toname \\
+        \toaddress
+      \end{minipage}%
+%    \end{macrocode}
+% A zero-width minipage is used to force the date downward to the
+% desired position.
+%    \begin{macrocode}
+      \begin{minipage}[t]{0mm}
+        \vspace*{35mm}%
+      \end{minipage}
+      \@date
+    \end{minipage}%
+%    \end{macrocode}
+% This minipage generates the whitespace between the two address
+% blocks.
+%    \begin{macrocode}
+    \begin{minipage}[t]{42mm}
+      \hspace{42mm}%
+      \vspace*{55mm}%
+    \end{minipage}%
+%    \end{macrocode}
+% For the address block, a series of checks are made so that no empty
+% lines are ended with |\\|.
+%    \begin{macrocode}
+    \begin{minipage}[t]{50mm}
+      \footnotesize
+      \raggedright
+      \ifx\@empty\fromfaculty
+        \ifx\@empty\fromdept\else
+          \ignorespaces\fromdept \\*[\baselineskip]
+        \fi
+      \else
+        \ifx\@empty\fromdept
+          \textbf{\ignorespaces\fromfaculty} \\*[\baselineskip]
+        \else
+          \textbf{\ignorespaces\fromfaculty} \\
+          \ignorespaces\fromdept \\*[\baselineskip]
+        \fi
+      \fi
+      \ifx\@empty\fromaddress\else
+        \ignorespaces\fromaddress \\*[\baselineskip]
+      \fi
+      \ifx\@empty\fromemail\else
+        Email: \ignorespaces\fromemail \\
+      \fi
+      \ifx\@empty\fromphone\else
+        Tel: \ignorespaces\fromphone \\
+      \fi
+      \ifx\@empty\fromfax\else
+        Fax: \ignorespaces\fromfax \\
+      \fi
+      \ifx\@empty\fromweb\else
+        \ignorespaces\fromweb \\
+      \fi
+    \end{minipage}%
+  \end{wider}
+  \par\noindent#1\par\nobreak
+  \ifx\@empty\lettersubject\else
+    \begin{center}
+      \expandafter\uea@MakeUppercase\lettersubject \\\@empty
+    \end{center}
+  \fi}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\uea@MakeUppercase}
+% A support macro is needed to allow multi-line uppercase.
+%    \begin{macrocode}
+\def\uea@MakeUppercase#1\\#2\@empty{%
+  \MakeUppercase{#1}%
+  \ifx\@empty#2\@empty\else
+    \\ \expandafter\uea@MakeUppercase#2\@empty
+  \fi}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\closing}
+%\darg{closing}
+% The same tricks are used for the closing.
+%    \begin{macrocode}
+\renewcommand{\closing}[1]{%
+  \par\nobreak\vspace{\parskip}%
+  \stopbreaks
+  \noindent
+  \ignorespaces #1\\[24mm]
+  \ifx\@empty\fromsig
+    \fromname \\
+  \else
+    \fromsig \\
+  \fi
+  \ifx\@empty\fromposition\else
+    \fromposition \\
+  \fi
+  \ifx\@empty\fromsignphone\else
+    \fromsignphone \\
+  \fi
+  \ifx\@empty\fromsignemail\else
+    \fromsignemail \\
+  \fi
+  \strut
+  \par}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\stopletter}
+% The \cs{stopletter} macro is used to push the contents up the page,
+% in contrast to normal \LaTeX\ behaviour.
+%    \begin{macrocode}
+\renewcommand*{\stopletter}{\vfill}
+%    \end{macrocode}
+%\end{macro}
+%
+%\Finale
+%\iffalse
+%</class>
+%<*jawltxdoc>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{jawltxdoc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[final]{listings,graphicx,microtype}
+\usepackage[scaled=0.95]{helvet}
+\usepackage[version=3]{mhchem}
+\usepackage[osf]{mathpazo}
+\usepackage{booktabs,array,url,courier,xspace,varioref}
+\usepackage{upgreek,ifpdf,float,caption,longtable,babel}
+\begingroup
+  \@ifundefined{eTeXversion}
+    {\aftergroup\@gobble}
+    {\aftergroup\@firstofone}
+\endgroup
+{\usepackage{etoolbox}}
+\floatstyle{plaintop}
+\restylefloat{table}
+\labelformat{figure}{\figurename~#1}
+\labelformat{table}{\tablename~#1}
+\ifpdf
+  \usepackage{embedfile}
+  \embedfile[%
+    stringmethod=escape,%
+    mimetype=plain/text,%
+    desc={LaTeX docstrip source archive for package `\jobname'}%
+    ]{\jobname.dtx}
+\fi
+\IfFileExists{\jobname.sty}
+  {\usepackage{\jobname}}{}
+\usepackage[numbered]{hypdoc}
+\setcounter{IndexColumns}{2}
+\newlength\LaTeXwidth
+\newlength\LaTeXoutdent
+\newlength\LaTeXgap
+\setlength\LaTeXgap{1em}
+\setlength\LaTeXoutdent{-0.15\textwidth}
+\newbox\lst@samplebox
+\edef\LaTeXexamplefile{\jobname.tmp}
+\lst@RequireAspects{writefile}
+\lstnewenvironment{LaTeXexample}[1][example]{%
+  \global\let\lst@intname\@empty
+  \ifcsname LaTeXcode#1\endcsname
+    \expandafter\let\expandafter\LaTeXcode
+      \csname LaTeXcode#1\endcsname
+    \expandafter\let\expandafter\LaTeXcodeend
+      \csname LaTeXcode#1end\endcsname
+  \else
+    \PackageError{jawltxdoc}
+      {Undefined example type `#1'}
+      \@ehd
+    \let\LaTeXcode\relax
+    \let\LaTeXcodeend\relax
+  \fi
+  \LaTeXcode}
+  {\lst@EndWriteFile
+   \LaTeXcodeend}
+\newcommand*{\LaTeXcodeexample}{%
+  \setbox\lst@samplebox=\hbox\bgroup
+  \LaTeXcodefloat}
+\let\LaTeXcoderesultonly\LaTeXcodeexample
+\newcommand*{\LaTeXcodeexampleend}{%
+  \egroup
+  \setlength\LaTeXwidth{\wd\lst@samplebox}%
+  \begin{list}{}{%
+    \setlength\itemindent{0pt}
+    \setlength\leftmargin\LaTeXoutdent
+    \setlength\rightmargin{0pt}}%
+    \item
+      \setlength\LaTeXoutdent{-0.15\textwidth}
+      \begin{minipage}[c]{%
+        \textwidth-\LaTeXwidth-\LaTeXoutdent-\LaTeXgap}
+        \LaTeXcodefloatend
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[c]{\LaTeXwidth}%
+        \hbox to\linewidth{\box\lst@samplebox\hss}%
+      \end{minipage}%
+  \end{list}}
+\newcommand*{\LaTeXcodefloat}{%
+  \setkeys{lst}{tabsize=4,gobble=3,breakindent=0pt,
+    basicstyle=\small\ttfamily,basewidth=0.51em,
+    keywordstyle=\color{blue}}%
+  \lst@BeginAlsoWriteFile{\LaTeXexamplefile}}
+\let\LaTeXcodenoexample\LaTeXcodefloat
+\let\LaTeXcodenoexampleend\@empty
+\newcommand*{\LaTeXcodefloatend}{%
+  \MakePercentComment\catcode`\^^M=10\relax
+  \small
+  {\setkeys{lst}{SelectCharTable=\lst@ReplaceInput{\^\^I}%
+    {\lst@ProcessTabulator}}%
+    \leavevmode \input{\LaTeXexamplefile}}%
+  \MakePercentIgnore}
+\newcommand*{\LaTeXcoderesultonlyend}{\egroup\LaTeXcodefloatend}
+\lstnewenvironment{BibTeXexample}{%
+  \global\let\lst@intname\@empty
+  \setbox\lst@samplebox=\hbox\bgroup
+  \setkeys{lst}{tabsize=4,gobble=3,breakindent=0pt,
+    basicstyle=\small\ttfamily,basewidth=0.51em,
+    keywordstyle=\color{black}}
+  \lst@BeginAlsoWriteFile{\LaTeXexamplefile}}
+ {\lst@EndWriteFile
+   \LaTeXcodeexampleend}
+\newcommand*{\DescribeOption}{%
+  \leavevmode\@bsphack\begingroup\MakePrivateLetters
+  \Describe@Option}
+\newcommand*{\Describe@Option}[1]{\endgroup
+              \marginpar{\raggedleft\PrintDescribeEnv{#1}}%
+              \SpecialOptionIndex{#1}\@esphack\ignorespaces}
+\newcommand*{\SpecialOptionIndex}[1]{\@bsphack
+    \index{#1\actualchar{\protect\ttfamily#1}
+           (option)\encapchar usage}%
+    \index{options:\levelchar#1\actualchar{\protect\ttfamily#1}%
+      \encapchar usage}\@esphack}
+\newcommand*{\indexopt}[1]{\DescribeOption{#1}\opt{#1}}
+\newcommand*{\DescribeOptionInfo}[2]{%
+  \DescribeOption{#1}%
+  \opt{#1=\meta{#2}}\xspace}
+\newcommand*{\ofixarg}[1]{%
+  {\ttfamily[}%
+  \ifmmode \expandafter \nfss@text \fi
+  {%
+    \meta@font@select
+    \edef\meta@hyphen@restore{%
+      \hyphenchar\the\font\the\hyphenchar\font}%
+    \hyphenchar\font\m@ne
+    \language\l@nohyphenation
+    #1\/%
+    \meta@hyphen@restore
+    }%
+    {\ttfamily]}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\currpkg}{\pkg{\jobname}\xspace}
+\newcommand*{\opt}[1]{\texttt{#1}}
+\newcommand*{\defaultopt}[1]{\opt{\textbf{#1}}}
+\newcommand*{\file}[1]{\texttt{#1}}
+\newcommand*{\ext}[1]{\file{.#1}}
+\newcommand*{\latin}[1]{\emph{#1}}
+\newcommand*{\etc}{%
+  \@ifnextchar.
+    {\latin{etc}}
+    {\latin{etc}.\xspace}}
+\newcommand*{\eg}{%
+  \@ifnextchar.
+    {\latin{e.g}}
+    {\latin{e.g}.\xspace}}
+\newcommand*{\ie}{%
+  \@ifnextchar.
+    {\latin{i.e}}
+    {\latin{i.e}.\xspace}}
+\newcommand*{\etal}{%
+  \@ifnextchar.
+    {\latin{et~al.}}
+    {\latin{et~al}.\xspace}}
+\newcommand*{\AMS}{{\protect\usefont{OMS}{cmsy}{m}{n}%
+  A\kern-.1667em\lower.5ex\hbox{M}\kern-.125emS}}
+\providecommand*{\eTeX}{\ensuremath{\varepsilon}-\TeX}
+\DeclareRobustCommand*{\XeTeX}
+  {X\kern-.125em\lower.5ex\hbox{\reflectbox{E}}\kern-.1667em\TeX}
+\providecommand*{\CTAN}{\textsc{ctan}}
+\@ifpackageloaded{etoolbox}
+  {\patchcmd{\@addmarginpar}
+    {\@latex@warning@no@line {Marginpar on page \thepage\space moved}}
+    {\relax}{}{}}
+  {}
+\newcounter{argument}
+\g@addto@macro\endmacro{\setcounter{argument}{0}}
+\newcommand*\darg[1]{%
+  \stepcounter{argument}%
+  {\ttfamily\char`\#\theargument~:~}#1\par\noindent\ignorespaces}
+\newcommand*\doarg[1]{%
+  \stepcounter{argument}%
+  {\ttfamily\makebox[0pt][r]{[}%
+   \char`\#\theargument]:~}#1\par\noindent\ignorespaces}
+%</jawltxdoc>
+%\fi
