@@ -153,7 +153,7 @@ other organisations.
 %\DoNotIndex{\unitlength,\vfill,\vspace,\z@,\MakeUppercase}
 %\DoNotIndex{\renewcommand,\thispagestyle,\expandafter,\bfseries}
 %
-%\CheckSum{356}
+%\CheckSum{354}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -171,13 +171,12 @@ other organisations.
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-%\def\GetSVNId$#1: #2.#3 #4 #5-#6-#7 #8 #9${%
-%  \def\fileversion{v1.0a}%
-%  \def\filedate{#5/#6/#7}}
-%
-%\GetSVNId $Id: uealttr.dtx 14 2008-07-23 22:03:33Z joseph $
+%\def\fileversion{v1.1}
+%\def\filedate{2008/10/31}
 %
 %\changes{v1.0}{2008/07/21}{First public release}
+%\changes{v1.1}{2008/08/14}{Improved match of layout with official
+%  template}
 %
 %\setkeys{lst}{language=[LaTeX]{TeX},moretexcs={name,faculty,address,
 %  department,email,phone,fax,web,position,closing,opening,logo,
@@ -355,11 +354,11 @@ other organisations.
 %    Norwich NR4 7TJ \\
 %    United Kingdom}
 %  \email{joseph.wright@uea.ac.uk}
-%  \phone{+44 (0)1603 591680}
-%  \fax{+44 (0)1603 592044}
+%  \phone{+44 (0) 1603 591680}
+%  \fax{+44 (0) 1603 592044}
 %  \web{www.uea.ac.uk}
 %  \position{Senior Research Associate}
-%  \RequirePackage{microtype}
+%  \RequirePackage[final]{microtype}
 %  \RequirePackage{babel}
 %\end{LaTeXexample}
 %
@@ -389,16 +388,12 @@ other organisations.
 %\fi
 %
 %\section{The code}
-%\begin{macro}{\uea@id}
 % The package starts with the usual identification.
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\def\uea@id$#1: #2.#3 #4 #5-#6-#7 #8 #9${#5/#6/#7}
 \ProvidesClass{uealttr}
-  [\uea@id$Id: uealttr.dtx 14 2008-07-23 22:03:33Z joseph $
-   v1.0a A letter class for UEA]
+  [2008/10/31 v1.1 A letter class for UEA]
 %    \end{macrocode}
-%\end{macro}
 % The standard support packages are loaded.
 %    \begin{macrocode}
 \LoadClass[10pt,a4paper]{letter}
@@ -592,14 +587,14 @@ other organisations.
 %    \begin{macrocode}
 \renewcommand*{\opening}[1]{%
   \thispagestyle{empty}%
-  \vspace*{19mm}%
+  \vspace*{18mm}%
 %    \end{macrocode}
 % If the logo has been requested, it is included here.
 %    \begin{macrocode}
   \ifuea@logo
     \AddToShipoutPicture*{%
       \setlength{\unitlength}{1mm}%
-      \put(147,257){\includegraphics{\fromlogo}}}%
+      \put(149,257.5){\includegraphics[scale=0.95]{\fromlogo}}}%
   \fi
 %    \end{macrocode}
 % The address block is created by using a series of minipages of the
@@ -623,7 +618,7 @@ other organisations.
 % desired position.
 %    \begin{macrocode}
       \begin{minipage}[t]{0mm}
-        \vspace*{35mm}%
+        \vspace*{32mm}%
       \end{minipage}
       \@date
     \end{minipage}%
@@ -631,15 +626,16 @@ other organisations.
 % This minipage generates the whitespace between the two address
 % blocks.
 %    \begin{macrocode}
-    \begin{minipage}[t]{42mm}
-      \hspace{42mm}%
-      \vspace*{55mm}%
+    \begin{minipage}[t]{40mm}
+      \hspace*{40mm}%
+      \vspace*{50mm}%
     \end{minipage}%
 %    \end{macrocode}
 % For the address block, a series of checks are made so that no empty
 % lines are ended with |\\|.
 %    \begin{macrocode}
     \begin{minipage}[t]{50mm}
+      \vspace*{-3mm}%
       \footnotesize
       \raggedright
       \ifx\@empty\fromfaculty
@@ -696,7 +692,7 @@ other organisations.
   \par\nobreak\vspace{\parskip}%
   \stopbreaks
   \noindent
-  \ignorespaces #1\\[24mm]
+  \ignorespaces #1\\[22mm]
   \ifx\@empty\fromsig
     \fromname \\
   \else
