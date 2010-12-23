@@ -151,9 +151,9 @@ other organisations.
 %\DoNotIndex{\SetupKeyvalOptions,\sfdefault,\stopbreaks,\strut}
 %\DoNotIndex{\textbf,\thispagestyl,\toaddress,\toname,\topsep}
 %\DoNotIndex{\unitlength,\vfill,\vspace,\z@,\MakeUppercase}
-%\DoNotIndex{\renewcommand,\thispagestyle,\expandafter}
+%\DoNotIndex{\renewcommand,\thispagestyle,\expandafter,\bfseries}
 %
-%\CheckSum{357}
+%\CheckSum{356}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -172,10 +172,10 @@ other organisations.
 %   Right brace   \}     Tilde         \~}
 %
 %\def\GetSVNId$#1: #2.#3 #4 #5-#6-#7 #8 #9${%
-%  \def\fileversion{v1.0}%
+%  \def\fileversion{v1.0a}%
 %  \def\filedate{#5/#6/#7}}
 %
-%\GetSVNId $Id: uealttr.dtx 10 2008-07-22 10:07:12Z joseph $
+%\GetSVNId $Id: uealttr.dtx 14 2008-07-23 22:03:33Z joseph $
 %
 %\changes{v1.0}{2008/07/21}{First public release}
 %
@@ -276,6 +276,8 @@ other organisations.
 % area, if required.
 %
 %\DescribeMacro{\subject}
+%\changes{v1.0a}{2008/07/23}{Altered \cs{subject} macro to alter
+%  style used by the Registry}
 %\DescribeMacro{\faculty}
 %\DescribeMacro{\department}
 % A number of pieces of data can be gathered by the standard
@@ -393,8 +395,8 @@ other organisations.
 \NeedsTeXFormat{LaTeX2e}
 \def\uea@id$#1: #2.#3 #4 #5-#6-#7 #8 #9${#5/#6/#7}
 \ProvidesClass{uealttr}
-  [\uea@id$Id: uealttr.dtx 10 2008-07-22 10:07:12Z joseph $
-   v1.0 A letter class for UEA]
+  [\uea@id$Id: uealttr.dtx 14 2008-07-23 22:03:33Z joseph $
+   v1.0a A letter class for UEA]
 %    \end{macrocode}
 %\end{macro}
 % The standard support packages are loaded.
@@ -670,11 +672,10 @@ other organisations.
     \end{minipage}%
   \end{wider}
   \par\noindent#1\par\nobreak
-  \ifx\@empty\lettersubject\else
-    \begin{center}
-      \expandafter\uea@MakeUppercase\lettersubject \\\@empty
-    \end{center}
-  \fi}
+  {\bfseries
+   \ifx\@empty\lettersubject\else
+     \expandafter\uea@MakeUppercase\lettersubject \\\@empty
+   \fi}}
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\uea@MakeUppercase}
